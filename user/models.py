@@ -1,5 +1,4 @@
 from django.db import models
-from posting.models import Content
 
 
 class User(models.Model):
@@ -14,17 +13,20 @@ class User(models.Model):
     is_banned = models.BooleanField()
     detail_exist = models.BooleanField()
 
+
 class Scrap(models.Model):
     scrap_id = models.IntegerField()
     created_at = models.DateTimeField()
-    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    content = models.ForeignKey('posting.Content', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 class Write(models.Model):
     write_id = models.IntegerField(primary_key=True)
     created_at = models.DateTimeField()
-    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    content = models.ForeignKey('posting.Content', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 class Message(models.Model):
     message_id = models.IntegerField(primary_key=True)
@@ -33,3 +35,11 @@ class Message(models.Model):
     send_date = models.DateTimeField()
     with_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="friend")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="self")
+
+
+class Comment(models.Model):
+    comment_id = models.IntegerField()
+    registerd_at = models.DateTimeField()
+    message = models.CharField(max_length=2000)
+    is_recreated = models.BooleanField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

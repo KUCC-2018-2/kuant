@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .models import User, Message, Write, Scrap
-from .serializers import UserSerializer, MessageSerializer, WriteSerializer, ScrapSerializer
+from .models import User, Message, Write, Scrap, Comment
+from .serializers import UserSerializer, MessageSerializer, WriteSerializer, ScrapSerializer, CommentSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -22,4 +22,9 @@ class WriteViewSet(viewsets.ModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 

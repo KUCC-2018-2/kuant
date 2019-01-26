@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User, Scrap, Message, Write
+from .models import User, Scrap, Message, Write, Comment
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -21,4 +21,9 @@ class WriteSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta :
         model = Message
+        fields = "__all__"
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
         fields = "__all__"
