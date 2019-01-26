@@ -1,11 +1,23 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 
-from .views import UserViewSet
+from .views import UserViewSet, WriteViewSet, ScrapViewSet, MessageViewSet
 
-router = DefaultRouter()
-router.register('user', UserViewSet)
+userRouter = DefaultRouter()
+userRouter.register('user', UserViewSet)
+
+writeRouter = DefaultRouter()
+userRouter.register('write', WriteViewSet)
+
+scrapRouter = DefaultRouter()
+scrapRouter.register('scrap', ScrapViewSet)
+
+messageRouter = DefaultRouter()
+messageRouter.register('message', MessageViewSet)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(writeRouter.urls)),
+    path('', include(userRouter.urls)),
+    path('', include(scrapRouter.urls)),
+    path('', include(messageRouter.urls)),
 ]

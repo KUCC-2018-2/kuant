@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import User, Message, Scrap, Write
+
+
+admin.site.register(User)
+admin.site.register(Message)
+admin.site.register(Scrap)
+admin.site.register(Write)

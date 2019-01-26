@@ -1,4 +1,5 @@
 from django.db import models
+from posting.models import Content
 
 
 class User(models.Model):
@@ -12,3 +13,23 @@ class User(models.Model):
     phone_num = models.CharField(max_length=45)
     is_banned = models.BooleanField()
     detail_exist = models.BooleanField()
+
+class Scrap(models.Model):
+    scrap_id = models.IntegerField()
+    created_at = models.DateTimeField()
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Write(models.Model):
+    write_id = models.IntegerField(primary_key=True)
+    created_at = models.DateTimeField()
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Message(models.Model):
+    message_id = models.IntegerField(primary_key=True)
+    message_title = models.CharField(max_length=32)
+    message_text = models.CharField(max_length=1000)
+    send_date = models.DateTimeField()
+    with_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="friend")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="self")
