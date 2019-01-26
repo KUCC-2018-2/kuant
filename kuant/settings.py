@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     #APP
     'posting',
+    'user',
 ]
 
 MIDDLEWARE = [
