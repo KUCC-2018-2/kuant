@@ -1,5 +1,7 @@
 from django.db import models
 
+from user.models import User
+
 
 class WorkPlace(models.Model):
     workplace_name = models.CharField(max_length=30, null=False)
@@ -23,6 +25,7 @@ class Content(models.Model):
     work_enddate = models.DateTimeField
     pay = models.IntegerField(default=0)
     experience = models.CharField(max_length=1000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     workplace = models.ForeignKey(WorkPlace, on_delete=models.CASCADE)
     worktype = models.ForeignKey(WorkType, on_delete=models.CASCADE)
     image = models.CharField(max_length=1000)
